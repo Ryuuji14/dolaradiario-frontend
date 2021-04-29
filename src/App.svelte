@@ -11,19 +11,8 @@
 
   <div class="flex flex-col items-center my-12">
     <div class="text-white text-7xl">$1 = BS. 2.370.023,73</div>
-    <nav>
-      <NavLink to="chart">Chart</NavLink>
-    </nav>
-    <div>
-      <Route path="chart" component={Chart} />
-    </div>
-    <div class="flex">
-      <div class="hidden">1</div>
-      <div>2</div>
-      <div>3</div>
-    </div>
     <div class="flex justify-end">
-      <p class="text-white text-sm">Actualizado a las 9:00 AM</p>
+      <p class="text-white text-md">Actualizado a las 9:00 AM</p>
     </div>
     <div class="flex text-gray-700">
       <div class="flex flex-col items-center my-12">
@@ -74,7 +63,7 @@
         </div>
       </div>
     </div>
-    <div class="flex justify space-between">
+    <div class="flex space-x-14">
       <div>
         <button
           class="rounded-full h-20 w-20 flex items-center justify-center bg-gray-500"
@@ -156,7 +145,7 @@
     </div>
   </div>
   <footer
-    class="w-full text-center bg-primary text-white border-t border-grey p-4 absolute bottom-0"
+    class="w-full text-center bg-primary text-white border-t border-grey p-1 absolute bottom-0"
   >
     © 2021 KURODev.net - Todos los derechos reservados.
   </footer>
