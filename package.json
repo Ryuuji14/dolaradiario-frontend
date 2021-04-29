@@ -33,7 +33,9 @@
     "@tsconfig/svelte": "^1.0.0"
   },
   "dependencies": {
+    "@fullhuman/postcss-purgecss": "^4.0.3",
     "concurrently": "^6.0.2",
+    "postcss-import": "^14.0.1",
     "sirv-cli": "^1.0.0",
     "svelte-routing": "^1.6.0"
   }
