@@ -10,18 +10,26 @@
   <img class="mx-auto" src="./assets/logo.png" alt="dolar logo" />
 
   <div class="flex flex-col items-center my-12">
-    <div class="text-white text-7xl">$1 = BS. 2.370.023,73</div>
-    <div class="flex justify-end">
-      <p class="text-white text-md">Actualizado a las 9:00 AM</p>
+    <div class="text-5xl text-center text-white md:text-7xl">
+      <div class="md:flex md:space-x-2">
+        <p>$1</p>
+        <p>=</p>
+        <p class="text-primary">BS. 2.370.023,73</p>
+      </div>
+    </div>
+    <div class="flex">
+      <p class="pl-40 text-lg text-white md:pl-0">Actualizado a las 9:00 AM</p>
     </div>
     <div class="flex text-gray-700">
       <div class="flex flex-col items-center my-12">
         <div class="flex text-gray-700">
           <div class="flex h-8 text-xl">
-            <p class="text-white" style="margin-right: 5px;">SEGÚN</p>
+            <div class="hidden md:visible">
+              <p class="text-white" style="margin-right: 5px;">SEGÚN</p>
+            </div>
           </div>
           <div
-            class="h-8 w-8 mr-1 flex justify-center items-center rounded-full bg-gray-200 cursor-pointer"
+            class="flex items-center justify-center w-8 h-8 mr-1 bg-gray-200 rounded-full cursor-pointer"
           >
             <svg
               xmlns="http://www.w3.org/2000/svg"
@@ -33,17 +41,16 @@
               stroke-width="2"
               stroke-linecap="round"
               stroke-linejoin="round"
-              class="feather feather-chevron-left w-4 h-4"
+              class="w-4 h-4 feather feather-chevron-left"
             >
               <polyline points="15 18 9 12 15 6" />
             </svg>
           </div>
-
           <div class="flex h-8 text-xl">
             <p class="text-primary">Monitor Dolar</p>
           </div>
           <div
-            class="h-8 w-8 ml-1 flex justify-center items-center rounded-full bg-gray-200 cursor-pointer"
+            class="flex items-center justify-center w-8 h-8 ml-1 bg-gray-200 rounded-full cursor-pointer"
           >
             <svg
               xmlns="http://www.w3.org/2000/svg"
@@ -55,7 +62,7 @@
               stroke-width="2"
               stroke-linecap="round"
               stroke-linejoin="round"
-              class="feather feather-chevron-right w-4 h-4"
+              class="w-4 h-4 feather feather-chevron-right"
             >
               <polyline points="9 18 15 12 9 6" />
             </svg>
@@ -63,14 +70,14 @@
         </div>
       </div>
     </div>
-    <div class="flex space-x-14">
+    <div class="flex space-x-7 md:space-x-14">
       <div>
         <button
-          class="rounded-full h-20 w-20 flex items-center justify-center bg-gray-500"
+          class="flex items-center justify-center w-16 h-16 bg-gray-500 rounded-full md:w-20 md:h-20"
         >
           <svg
             xmlns="http://www.w3.org/2000/svg"
-            class="h-12 w-12"
+            class="w-12 h-12"
             fill="none"
             viewBox="0 0 24 24"
             stroke="currentColor"
@@ -86,11 +93,11 @@
       </div>
       <div>
         <button
-          class="rounded-full h-20 w-20 flex items-center justify-center bg-gray-500"
+          class="flex items-center justify-center w-16 h-16 bg-gray-500 rounded-full md:w-20 md:h-20"
         >
           <svg
             xmlns="http://www.w3.org/2000/svg"
-            class="h-12 w-12"
+            class="w-12 h-12"
             fill="none"
             viewBox="0 0 24 24"
             stroke="currentColor"
@@ -104,48 +111,52 @@
           </svg></button
         >
       </div>
-      <div class="md:hidden">
-        <button
-          class="rounded-full h-20 w-20 flex items-center justify-center bg-gray-500"
-        >
-          <svg
-            xmlns="http://www.w3.org/2000/svg"
-            class="h-6 w-6"
-            fill="none"
-            viewBox="0 0 24 24"
-            stroke="currentColor"
+      <div class="flex space-x-5 md:hidden">
+        <div>
+          <button
+            class="flex items-center justify-center w-16 h-16 bg-gray-500 rounded-full md:w-20 md:h-20"
           >
-            <path
-              stroke-linecap="round"
-              stroke-linejoin="round"
-              stroke-width="2"
-              d="M9 5H7a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0 002 2h2a2 2 0 002-2M9 5a2 2 0 012-2h2a2 2 0 012 2"
-            />
-          </svg></button
-        >
-        <button
-          class="rounded-full h-20 w-20 flex items-center justify-center bg-gray-500"
-        >
-          <svg
-            xmlns="http://www.w3.org/2000/svg"
-            class="h-6 w-6"
-            fill="none"
-            viewBox="0 0 24 24"
-            stroke="currentColor"
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              class="w-12 h-12"
+              fill="none"
+              viewBox="0 0 24 24"
+              stroke="currentColor"
+            >
+              <path
+                stroke-linecap="round"
+                stroke-linejoin="round"
+                stroke-width="2"
+                d="M9 5H7a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0 002 2h2a2 2 0 002-2M9 5a2 2 0 012-2h2a2 2 0 012 2"
+              />
+            </svg></button
           >
-            <path
-              stroke-linecap="round"
-              stroke-linejoin="round"
-              stroke-width="2"
-              d="M8.684 13.342C8.886 12.938 9 12.482 9 12c0-.482-.114-.938-.316-1.342m0 2.684a3 3 0 110-2.684m0 2.684l6.632 3.316m-6.632-6l6.632-3.316m0 0a3 3 0 105.367-2.684 3 3 0 00-5.367 2.684zm0 9.316a3 3 0 105.368 2.684 3 3 0 00-5.368-2.684z"
-            />
-          </svg></button
-        >
+        </div>
+        <div>
+          <button
+            class="flex items-center justify-center w-16 h-16 bg-gray-500 rounded-full md:w-20 md:h-20"
+          >
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              class="w-12 h-12"
+              fill="none"
+              viewBox="0 0 24 24"
+              stroke="currentColor"
+            >
+              <path
+                stroke-linecap="round"
+                stroke-linejoin="round"
+                stroke-width="2"
+                d="M8.684 13.342C8.886 12.938 9 12.482 9 12c0-.482-.114-.938-.316-1.342m0 2.684a3 3 0 110-2.684m0 2.684l6.632 3.316m-6.632-6l6.632-3.316m0 0a3 3 0 105.367-2.684 3 3 0 00-5.367 2.684zm0 9.316a3 3 0 105.368 2.684 3 3 0 00-5.368-2.684z"
+              />
+            </svg></button
+          >
+        </div>
       </div>
     </div>
   </div>
   <footer
-    class="w-full text-center bg-primary text-white border-t border-grey p-1 absolute bottom-0"
+    class="absolute bottom-0 w-full p-1 text-center text-white border-t bg-primary border-grey"
   >
     © 2021 KURODev.net - Todos los derechos reservados.
   </footer>
