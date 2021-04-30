@@ -1,0 +1,6 @@
+[
+  { "description": "DolarToday", "logo": "./assets/DolarToday.svg" },
+  { "description": "MonitorDolar", "logo": "./assets/MonitorDolar.svg" },
+  { "description": "BCV", "logo": "./assets/BCV.svg" },
+  { "description": "Petro", "logo": "./assets/Petro.svg" }
+]
