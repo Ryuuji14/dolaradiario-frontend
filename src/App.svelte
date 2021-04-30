@@ -7,9 +7,9 @@
 </script>
 
 <Router {url}>
-  <img class="mx-auto" src="./assets/logo.png" alt="dolar logo" />
+  <img class="w-64 h-32 mx-auto" src="./assets/logo.png" alt="dolar logo" />
 
-  <div class="flex flex-col items-center my-12">
+  <div class="flex flex-col items-center my-20">
     <div class="text-5xl text-center text-white md:text-7xl">
       <div class="md:flex md:space-x-2">
         <p>$1</p>
@@ -20,53 +20,52 @@
     <div class="flex">
       <p class="pl-40 text-lg text-white md:pl-0">Actualizado a las 9:00 AM</p>
     </div>
-    <div class="flex text-gray-700">
-      <div class="flex flex-col items-center my-12">
-        <div class="flex text-gray-700">
-          <div class="flex h-8 text-xl">
-            <div class="hidden md:visible">
-              <p class="text-white" style="margin-right: 5px;">SEGÚN</p>
-            </div>
+    <div class="flex flex-col items-center my-12">
+      <div class="flex">
+        <div class="flex h-8 text-xl">
+          <div class="hidden md:visible">
+            <p class="text-white" style="margin-right: 5px;">SEGÚN</p>
           </div>
-          <div
-            class="flex items-center justify-center w-8 h-8 mr-1 bg-gray-200 rounded-full cursor-pointer"
+        </div>
+        <div
+          class="flex items-center justify-center w-8 h-8 bg-gray-200 rounded-full cursor-pointer mr-14"
+        >
+          <svg
+            xmlns="http://www.w3.org/2000/svg"
+            width="100%"
+            height="100%"
+            fill="none"
+            viewBox="0 0 24 24"
+            stroke="currentColor"
+            stroke-width="2"
+            stroke-linecap="round"
+            stroke-linejoin="round"
+            class="w-4 h-4 feather feather-chevron-left"
           >
-            <svg
-              xmlns="http://www.w3.org/2000/svg"
-              width="100%"
-              height="100%"
-              fill="none"
-              viewBox="0 0 24 24"
-              stroke="currentColor"
-              stroke-width="2"
-              stroke-linecap="round"
-              stroke-linejoin="round"
-              class="w-4 h-4 feather feather-chevron-left"
-            >
-              <polyline points="15 18 9 12 15 6" />
-            </svg>
-          </div>
-          <div class="flex h-8 text-xl">
-            <p class="text-primary">Monitor Dolar</p>
-          </div>
-          <div
-            class="flex items-center justify-center w-8 h-8 ml-1 bg-gray-200 rounded-full cursor-pointer"
+            <polyline points="15 18 9 12 15 6" />
+          </svg>
+        </div>
+        <div class="flex justify-center h-8 space-x-4">
+          <img src="./assets/MonitorDolar.svg" alt="monitor dolar" />
+          <p class="text-2xl text-primary">MonitorDolar</p>
+        </div>
+        <div
+          class="flex items-center justify-center w-8 h-8 bg-gray-200 rounded-full cursor-pointer ml-14"
+        >
+          <svg
+            xmlns="http://www.w3.org/2000/svg"
+            width="100%"
+            height="100%"
+            fill="none"
+            viewBox="0 0 24 24"
+            stroke="currentColor"
+            stroke-width="2"
+            stroke-linecap="round"
+            stroke-linejoin="round"
+            class="w-4 h-4 feather feather-chevron-right"
           >
-            <svg
-              xmlns="http://www.w3.org/2000/svg"
-              width="100%"
-              height="100%"
-              fill="none"
-              viewBox="0 0 24 24"
-              stroke="currentColor"
-              stroke-width="2"
-              stroke-linecap="round"
-              stroke-linejoin="round"
-              class="w-4 h-4 feather feather-chevron-right"
-            >
-              <polyline points="9 18 15 12 9 6" />
-            </svg>
-          </div>
+            <polyline points="9 18 15 12 9 6" />
+          </svg>
         </div>
       </div>
     </div>
@@ -163,10 +162,4 @@
 </Router>
 
 <style>
-  img {
-    width: 285px;
-    height: 142px;
-    min-width: 275px;
-    min-height: 138px;
-  }
 </style>
