@@ -119,20 +119,10 @@
 
 <SvelteToast />
 <img class="w-64 h-32 mx-auto" src="./assets/logo.png" alt="dolar logo" />
-{#if isViewingReport}
-  <Chart />
-{/if}
-<div
-  class="flex flex-col items-center {!isCalculating
-    ? 'my-20'
-    : 'my-15'} {!isViewingReport ? 'visible' : 'hidden'}"
->
-  <div
-    class="text-5xl text-center text-white md:text-7xl  {!isViewingReport
-      ? 'visible'
-      : 'hidden'}"
-  >
-    <div class="md:flex md:space-x-2">
+
+<div class="flex flex-col items-center {!isCalculating ? 'my-20' : 'my-15'}">
+  <div class="text-5xl text-center text-white md:text-7xl">
+    <div class="inline md:flex md:space-x-2">
       {#if !isCalculating}
         <p on:click={toggleCalculator}>$1</p>
         <p>=</p>
@@ -323,7 +313,11 @@
     </div>
   </div>
 </div>
-<Footer />
+<footer class="footer-mobile">
+  © 2021 KURODev.net <p class="hidden-text-footer">
+    - Todos los derechos reservados.
+  </p>
+</footer>
 
 <style>
 </style>

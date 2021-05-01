@@ -23,7 +23,8 @@ Use a more readable tab size (opinionated).
 
 :root {
   -moz-tab-size: 4;
-  tab-size: 4;
+  -o-tab-size: 4;
+     tab-size: 4;
 }
 
 /**
@@ -91,7 +92,8 @@ Add the correct text decoration in Chrome, Edge, and Safari.
 */
 
 abbr[title] {
-  text-decoration: underline dotted;
+  -webkit-text-decoration: underline dotted;
+          text-decoration: underline dotted;
 }
 
 /**
@@ -404,6 +406,16 @@ textarea {
   resize: vertical;
 }
 
+input::-moz-placeholder, textarea::-moz-placeholder {
+  opacity: 1;
+  color: #9ca3af;
+}
+
+input:-ms-input-placeholder, textarea:-ms-input-placeholder {
+  opacity: 1;
+  color: #9ca3af;
+}
+
 input::placeholder,
 textarea::placeholder {
   opacity: 1;
@@ -522,7 +534,9 @@ video {
 }
 
 .appearance-none {
-  appearance: none;
+  -webkit-appearance: none;
+     -moz-appearance: none;
+          appearance: none;
 }
 
 .bg-black {
@@ -538,11 +552,6 @@ video {
 .bg-gray-500 {
   --tw-bg-opacity: 1;
   background-color: rgba(107, 114, 128, var(--tw-bg-opacity));
-}
-
-.bg-primary {
-  --tw-bg-opacity: 1;
-  background-color: rgba(20, 204, 96, var(--tw-bg-opacity));
 }
 
 .bg-secondary {
@@ -565,10 +574,6 @@ video {
 
 .border {
   border-width: 1px;
-}
-
-.border-t {
-  border-top-width: 1px;
 }
 
 .cursor-pointer {
@@ -675,10 +680,6 @@ video {
   outline-offset: 2px;
 }
 
-.p-1 {
-  padding: 0.25rem;
-}
-
 .py-2 {
   padding-top: 0.5rem;
   padding-bottom: 0.5rem;
@@ -691,14 +692,6 @@ video {
 
 .pl-40 {
   padding-left: 10rem;
-}
-
-.relative {
-  position: relative;
-}
-
-.bottom-0 {
-  bottom: 0px;
 }
 
 * {
@@ -757,9 +750,22 @@ video {
   width: 100%;
 }
 
+@-webkit-keyframes spin {
+  to {
+    transform: rotate(360deg);
+  }
+}
+
 @keyframes spin {
   to {
     transform: rotate(360deg);
+  }
+}
+
+@-webkit-keyframes ping {
+  75%, 100% {
+    transform: scale(2);
+    opacity: 0;
   }
 }
 
@@ -770,21 +776,74 @@ video {
   }
 }
 
+@-webkit-keyframes pulse {
+  50% {
+    opacity: .5;
+  }
+}
+
 @keyframes pulse {
   50% {
     opacity: .5;
   }
 }
 
-@keyframes bounce {
+@-webkit-keyframes bounce {
   0%, 100% {
     transform: translateY(-25%);
-    animation-timing-function: cubic-bezier(0.8,0,1,1);
+    -webkit-animation-timing-function: cubic-bezier(0.8,0,1,1);
+            animation-timing-function: cubic-bezier(0.8,0,1,1);
   }
 
   50% {
     transform: none;
-    animation-timing-function: cubic-bezier(0,0,0.2,1);
+    -webkit-animation-timing-function: cubic-bezier(0,0,0.2,1);
+            animation-timing-function: cubic-bezier(0,0,0.2,1);
+  }
+}
+
+@keyframes bounce {
+  0%, 100% {
+    transform: translateY(-25%);
+    -webkit-animation-timing-function: cubic-bezier(0.8,0,1,1);
+            animation-timing-function: cubic-bezier(0.8,0,1,1);
+  }
+
+  50% {
+    transform: none;
+    -webkit-animation-timing-function: cubic-bezier(0,0,0.2,1);
+            animation-timing-function: cubic-bezier(0,0,0.2,1);
+  }
+}
+
+.footer-mobile {
+  --tw-bg-opacity: 1;
+  background-color: rgba(20, 204, 96, var(--tw-bg-opacity));
+  border-top-width: 1px;
+  margin-top: 1.25rem;
+  padding: 0.25rem;
+  position: relative;
+  bottom: 0px;
+  text-align: center;
+  --tw-text-opacity: 1;
+  color: rgba(239, 241, 243, var(--tw-text-opacity));
+  width: 100%;
+}
+
+@media (min-width: 768px) {
+  .footer-mobile {
+    margin-top: 0px;
+    position: absolute;
+  }
+}
+
+.hidden-text-footer {
+  display: none
+}
+
+@media (min-width: 768px) {
+  .hidden-text-footer {
+    visibility: visible;
   }
 }
 
