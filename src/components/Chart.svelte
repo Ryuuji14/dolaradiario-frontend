@@ -70,10 +70,10 @@
         };
         const dataset = info.map((i) => {
           return {
-            data: fechas.map( (f) => {
+            data: fechas.map((f) => {
             return i.prices.find((p) => {
               return p.date === f;
-            })
+            }).price
           }),
             label: i.provider,
             borderColor: randomColor(),
