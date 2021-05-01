@@ -3,8 +3,8 @@
   "version": "1.0.0",
   "private": true,
   "scripts": {
-    "watch:tailwind": "postcss public/tailwind.css -o public/index.css -w",
-    "build:tailwind": "cross-env NODE_ENV=production postcss public/tailwind.css -o public/index.css",
+    "watch:tailwind": "postcss src/tailwind.css -o public/final.css -w",
+    "build:tailwind": "cross-env NODE_ENV=production postcss src/tailwind.css -o final/index.css",
     "build": "npm run build:tailwind && rollup -c",
     "start": "sirv public --host 0.0.0.0",
     "serve": "serve public -p 80",

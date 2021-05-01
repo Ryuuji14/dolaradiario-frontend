@@ -119,6 +119,9 @@
 
 <SvelteToast />
 <img class="w-64 h-32 mx-auto" src="./assets/logo.png" alt="dolar logo" />
+{#if isViewingReport}
+  <Chart />
+{/if}
 
 <div class="flex flex-col items-center {!isCalculating ? 'my-20' : 'my-15'}">
   <div class="text-5xl text-center text-white md:text-7xl">

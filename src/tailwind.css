@@ -3,7 +3,7 @@
 @tailwind utilities;
 
 .footer-mobile {
-    @apply relative md:absolute mt-5 md:mt-0 bottom-0 w-full p-1 text-center text-white border-t bg-primary;
+    @apply relative bottom-0 w-full p-1 mt-5 text-center text-white border-t md:absolute md:mt-0 bg-primary;
 }
 
 .hidden-text-footer {
