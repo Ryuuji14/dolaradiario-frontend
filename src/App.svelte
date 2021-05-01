@@ -1,19 +1,23 @@
 <script>
   import { onMount } from "svelte";
-  import "svelte-carousel/dist/index.css";
+  import { SvelteToast } from "@zerodevx/svelte-toast";
+  import { toast } from "@zerodevx/svelte-toast";
 
   let selectedProvider = 2;
   let prices;
   let providers;
   let price = "Actualizando...";
-  let provider = "";
+  let provider = "Actualizando...";
   let updated = "";
   let img = "";
   let url = "";
   let numberPrice = 0;
   let usdCalc = 1;
   let bsCalc = 0;
-  let isCalculating = true;
+  let usdVisible = "1";
+  let bsVisible = "0";
+  let isCalculating = false;
+  let isViewingReport = false;
 
   onMount(async () => {
     await fetch(`https://dolaradiario.herokuapp.com/main`)
@@ -21,8 +25,6 @@
       .then((data) => {
         providers = data.data.providers;
         prices = data.data.prices;
-        console.log(providers);
-        console.log(prices);
         updateValues();
       });
   });
@@ -41,7 +43,12 @@
     }`;
     x.select();
     document.execCommand("copy");
-    alert("¡Copiado!");
+    toast.push("¡Precio copiado con éxito!", {
+      theme: {
+        "--toastBackground": "#48BB78",
+        "--toastProgressBackground": "#2F855A",
+      },
+    });
     document.body.removeChild(x);
   };
 
@@ -55,16 +62,24 @@
     updateValues();
   };
 
+  const beautifyNumber = (number) => {
+    return number
+      .toString()
+      .replace(".", ",")
+      .replace(/\B(?=(\d{3})+(?!\d))/g, ".");
+  };
+
+  const parseBeautifulNumber = (number) => {
+    return parseFloat(number.toString().replace(".", "").replace(",", "."));
+  };
+
   const updateValues = () => {
     const providerObject = providers.find((p) => p.id === selectedProvider);
     provider = providerObject.description;
     img = providerObject.logo;
     url = providerObject.url;
     const priceObject = prices.find((p) => p.provider_id === selectedProvider);
-    price = priceObject.value
-      .toString()
-      .replace(".", ",")
-      .replace(/\B(?=(\d{3})+(?!\d))/g, ".");
+    price = beautifyNumber(priceObject.value);
     numberPrice = priceObject.value;
     updated = new Date(priceObject.date).toLocaleDateString("es-VE", {
       timeZone: "America/Caracas",
@@ -72,26 +87,48 @@
       hour: "numeric",
       minute: "numeric",
     });
-    bsCalc = usdCalc * numberPrice;
+    bsCalc = Math.round(usdCalc * numberPrice * 100) / 100;
+    bsVisible = beautifyNumber(bsCalc);
   };
 
   const toggleCalculator = () => {
     isCalculating = !isCalculating;
+    isViewingReport = false;
     usdCalc = 1;
     bsCalc = usdCalc * numberPrice;
   };
 
+  const checkNaN = () => {
+    if (isNaN(bsCalc) || isNaN(usdCalc)) {
+      usdCalc = 1;
+      bsCalc = numberPrice;
+      bsVisible = beautifyNumber(bsCalc);
+      usdVisible = beautifyNumber(usdCalc);
+    }
+  };
+
   const calculateUSD = () => {
-    usdCalc = parseFloat(document.getElementById('usd').value);
-    bsCalc = Math.round(usdCalc * numberPrice*100)/100;
+    usdCalc = parseBeautifulNumber(document.getElementById("usd").value);
+    bsCalc = Math.round(usdCalc * numberPrice * 100) / 100;
+    bsVisible = beautifyNumber(bsCalc);
+    usdVisible = beautifyNumber(usdCalc);
+    checkNaN();
   };
 
   const calculateBS = (e) => {
-    bsCalc = parseFloat(document.getElementById('bs').value);
-    usdCalc = Math.round(bsCalc / numberPrice*100)/100;
+    bsCalc = parseBeautifulNumber(document.getElementById("bs").value);
+    usdCalc = Math.round((bsCalc / numberPrice) * 100) / 100;
+    usdVisible = beautifyNumber(usdCalc);
+    bsVisible = beautifyNumber(bsCalc);
+    checkNaN();
   };
+
+  const toggleViewingReport = () => {
+    isViewingReport = !isViewingReport;
+  }
 </script>
 
+<SvelteToast />
 <img class="w-64 h-32 mx-auto" src="./assets/logo.png" alt="dolar logo" />
 
 <div class="flex flex-col items-center my-20">
@@ -100,21 +137,21 @@
       {#if !isCalculating}
         <p on:click={toggleCalculator}>$1</p>
         <p>=</p>
-        <p class="text-primary" id="price" on:click={toggleCalculator}>BS. {price}</p>
+        <p class="text-primary" id="price" on:click={toggleCalculator}>
+          BS. {price}
+        </p>
       {:else}
         $<input
           class="shadow appearance-none border border-green-500 rounded w-full py-2 px-3 text-gray-700 mb-3 leading-tight focus:outline-none focus:shadow-outline bg-black"
           id="usd"
           on:input={calculateUSD}
-          type="number"
-          value={usdCalc}
+          value={usdVisible}
         />
         <p>=</p>
         Bs.<input
           class="shadow appearance-none border border-green-500 rounded w-full py-2 px-3 text-gray-700 mb-3 leading-tight focus:outline-none focus:shadow-outline bg-black"
-          value={bsCalc}
+          value={bsVisible}
           id="bs"
-          type="number"
           on:input={calculateBS}
         />
       {/if}
@@ -187,25 +224,43 @@
         class="flex items-center justify-center w-16 h-16 bg-gray-500 rounded-full md:w-20 md:h-20"
         on:click={toggleCalculator}
       >
-        <svg
-          xmlns="http://www.w3.org/2000/svg"
-          class="w-12 h-12"
-          fill="none"
-          viewBox="0 0 24 24"
-          stroke="currentColor"
-        >
-          <path
-            stroke-linecap="round"
-            stroke-linejoin="round"
-            stroke-width="2"
-            d="M9 7h6m0 10v-3m-3 3h.01M9 17h.01M9 14h.01M12 14h.01M15 11h.01M12 11h.01M9 11h.01M7 21h10a2 2 0 002-2V5a2 2 0 00-2-2H7a2 2 0 00-2 2v14a2 2 0 002 2z"
-          />
-        </svg></button
-      >
+        {#if !isCalculating}
+          <svg
+            xmlns="http://www.w3.org/2000/svg"
+            class="w-12 h-12"
+            fill="none"
+            viewBox="0 0 24 24"
+            stroke="currentColor"
+          >
+            <path
+              stroke-linecap="round"
+              stroke-linejoin="round"
+              stroke-width="2"
+              d="M9 7h6m0 10v-3m-3 3h.01M9 17h.01M9 14h.01M12 14h.01M15 11h.01M12 11h.01M9 11h.01M7 21h10a2 2 0 002-2V5a2 2 0 00-2-2H7a2 2 0 00-2 2v14a2 2 0 002 2z"
+            />
+          </svg>
+        {:else}
+          <svg
+            xmlns="http://www.w3.org/2000/svg"
+            class="w-12 h-12"
+            fill="none"
+            viewBox="0 0 24 24"
+            stroke="currentColor"
+          >
+            <path
+              stroke-linecap="round"
+              stroke-linejoin="round"
+              stroke-width="2"
+              d="M4 4v5h.582m15.356 2A8.001 8.001 0 004.582 9m0 0H9m11 11v-5h-.581m0 0a8.003 8.003 0 01-15.357-2m15.357 2H15"
+            />
+          </svg>
+        {/if}
+      </button>
     </div>
     <div>
       <button
         class="flex items-center justify-center w-16 h-16 bg-gray-500 rounded-full md:w-20 md:h-20"
+        on:click={toggleViewingReport}
       >
         <svg
           xmlns="http://www.w3.org/2000/svg"
@@ -245,26 +300,7 @@
           </svg></button
         >
       </div>
-      <div>
-        <button
-          class="flex items-center justify-center w-16 h-16 bg-gray-500 rounded-full md:w-20 md:h-20"
-        >
-          <svg
-            xmlns="http://www.w3.org/2000/svg"
-            class="w-12 h-12"
-            fill="none"
-            viewBox="0 0 24 24"
-            stroke="currentColor"
-          >
-            <path
-              stroke-linecap="round"
-              stroke-linejoin="round"
-              stroke-width="2"
-              d="M8.684 13.342C8.886 12.938 9 12.482 9 12c0-.482-.114-.938-.316-1.342m0 2.684a3 3 0 110-2.684m0 2.684l6.632 3.316m-6.632-6l6.632-3.316m0 0a3 3 0 105.367-2.684 3 3 0 00-5.367 2.684zm0 9.316a3 3 0 105.368 2.684 3 3 0 00-5.368-2.684z"
-            />
-          </svg></button
-        >
-      </div>
+
     </div>
   </div>
 </div>

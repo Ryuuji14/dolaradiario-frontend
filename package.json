@@ -35,7 +35,9 @@
   },
   "dependencies": {
     "@fullhuman/postcss-purgecss": "^4.0.3",
+    "@zerodevx/svelte-toast": "^0.2.2",
     "concurrently": "^6.0.2",
+    "echarts": "^5.1.1",
     "postcss-import": "^14.0.1",
     "sirv-cli": "^1.0.0",
     "svelte-carousel": "^1.0.3",
