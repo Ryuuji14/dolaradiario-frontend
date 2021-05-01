@@ -317,9 +317,10 @@
   </div>
 </div>
 <footer class="footer-mobile">
-  © 2021 KURODev.net <p class="hidden-text-footer">
-    - Todos los derechos reservados.
-  </p>
+  © 2021 KURODev.net
+  <div class="hidden-text-footer">
+    <p>- Todos los derechos reservados.</p>
+  </div>
 </footer>
 
 <style>
