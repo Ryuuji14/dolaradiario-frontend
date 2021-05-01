@@ -4,7 +4,6 @@ const purgecss = require("@fullhuman/postcss-purgecss");
 module.exports = {
   plugins: [
     require("postcss-import")(),
-    require("precss")(),
     require("tailwindcss"),
     production && require("autoprefixer"),
     production &&
