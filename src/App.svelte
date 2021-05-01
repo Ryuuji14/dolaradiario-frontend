@@ -114,6 +114,7 @@
   };
   const toggleViewingReport = () => {
     isViewingReport = !isViewingReport;
+    isCalculating = false;
   };
 </script>
 
@@ -126,13 +127,14 @@
 <div class="flex flex-col items-center {!isCalculating ? 'my-20' : 'my-15'}">
   <div class="text-5xl text-center text-white md:text-7xl">
     <div class="inline md:flex md:space-x-2">
-      {#if !isCalculating}
+      {#if !isCalculating && !isViewingReport}
         <p on:click={toggleCalculator}>$1</p>
         <p>=</p>
         <p class="text-primary" id="price" on:click={toggleCalculator}>
           BS. {price}
         </p>
       {:else}
+      {#if !isViewingReport}
         $<input
           class="w-full px-3 py-2 mb-3 leading-tight text-gray-700 border border-green-500 rounded shadow appearance-none bg-secondary focus:outline-none focus:shadow-outline"
           id="usd"
@@ -146,6 +148,7 @@
           id="bs"
           on:input={calculateBS}
         />
+        {/if}
       {/if}
     </div>
   </div>
@@ -274,7 +277,7 @@
         {:else}
           <svg
             xmlns="http://www.w3.org/2000/svg"
-            class="w-6 h-6"
+            class="w-6 h-6 -m-t-8"
             fill="none"
             viewBox="0 0 24 24"
             stroke="currentColor"

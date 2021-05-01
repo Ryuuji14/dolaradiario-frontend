@@ -60,8 +60,6 @@
         const fechas = [
           ...new Set(info[0].prices.map((price) => price.date)),
         ].reverse();
-        console.log(fechas);
-        console.log(info);
         const randomColor = () => {
           var letters = "0123456789ABCDEF".split("");
           var color = "#";
@@ -72,7 +70,11 @@
         };
         const dataset = info.map((i) => {
           return {
-            data: fechas.map((f) => i.prices.find((p) => p.date === f)?.price),
+            data: fechas.map((f) => {
+            return i.prices.find((p) => {
+              return p.date === f;
+            })?.price
+          }),
             label: i.provider,
             borderColor: randomColor(),
           };
