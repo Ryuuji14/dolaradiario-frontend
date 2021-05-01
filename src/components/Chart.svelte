@@ -69,12 +69,13 @@
           return color;
         };
         const dataset = info.map((i) => {
-          return {
-            data: fechas.map((f) => {
+          const prices = fechas.map((f) => {
             return i.prices.find((p) => {
               return p.date === f;
-            })?.price
-          }),
+            });
+          });
+          return {
+            data: prices.map((p) => p ? p.price : undefined),
             label: i.provider,
             borderColor: randomColor(),
           };
@@ -89,7 +90,7 @@
           options: {
             title: {
               display: true,
-              text: "World population per region (in millions)",
+              text: "Precio del dólar a lo largo del último mes...",
             },
           },
         });

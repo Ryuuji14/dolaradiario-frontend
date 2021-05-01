@@ -23,7 +23,8 @@ Use a more readable tab size (opinionated).
 
 :root {
   -moz-tab-size: 4;
-  tab-size: 4;
+  -o-tab-size: 4;
+     tab-size: 4;
 }
 
 /**
@@ -91,7 +92,8 @@ Add the correct text decoration in Chrome, Edge, and Safari.
 */
 
 abbr[title] {
-  text-decoration: underline dotted;
+  -webkit-text-decoration: underline dotted;
+          text-decoration: underline dotted;
 }
 
 /**
@@ -405,6 +407,16 @@ textarea {
   resize: vertical;
 }
 
+input::-moz-placeholder, textarea::-moz-placeholder {
+  opacity: 1;
+  color: #9ca3af;
+}
+
+input:-ms-input-placeholder, textarea:-ms-input-placeholder {
+  opacity: 1;
+  color: #9ca3af;
+}
+
 input::placeholder,
 textarea::placeholder {
   opacity: 1;
@@ -523,7 +535,9 @@ video {
 }
 
 .appearance-none {
-  appearance: none;
+  -webkit-appearance: none;
+     -moz-appearance: none;
+          appearance: none;
 }
 
 .bg-gray-200 {
@@ -666,6 +680,10 @@ video {
   margin-bottom: 0.75rem;
 }
 
+.mt-5 {
+  margin-top: 1.25rem;
+}
+
 .mr-14 {
   margin-right: 3.5rem;
 }
@@ -695,6 +713,10 @@ video {
 
 .pl-40 {
   padding-left: 10rem;
+}
+
+.fixed {
+  position: fixed;
 }
 
 .absolute {
@@ -769,9 +791,22 @@ video {
   width: 100%;
 }
 
+@-webkit-keyframes spin {
+  to {
+    transform: rotate(360deg);
+  }
+}
+
 @keyframes spin {
   to {
     transform: rotate(360deg);
+  }
+}
+
+@-webkit-keyframes ping {
+  75%, 100% {
+    transform: scale(2);
+    opacity: 0;
   }
 }
 
@@ -782,43 +817,48 @@ video {
   }
 }
 
+@-webkit-keyframes pulse {
+  50% {
+    opacity: .5;
+  }
+}
+
 @keyframes pulse {
   50% {
     opacity: .5;
   }
 }
 
-@keyframes bounce {
+@-webkit-keyframes bounce {
   0%, 100% {
     transform: translateY(-25%);
-    animation-timing-function: cubic-bezier(0.8,0,1,1);
+    -webkit-animation-timing-function: cubic-bezier(0.8,0,1,1);
+            animation-timing-function: cubic-bezier(0.8,0,1,1);
   }
 
   50% {
     transform: none;
-    animation-timing-function: cubic-bezier(0,0,0.2,1);
+    -webkit-animation-timing-function: cubic-bezier(0,0,0.2,1);
+            animation-timing-function: cubic-bezier(0,0,0.2,1);
   }
 }
 
-.footer-mobile {
-  --tw-bg-opacity: 1;
-  background-color: rgba(20, 204, 96, var(--tw-bg-opacity));
-  border-top-width: 1px;
-  margin-top: 1.25rem;
-  padding: 0.25rem;
-  position: relative;
-  bottom: 0px;
-  text-align: center;
-  --tw-text-opacity: 1;
-  color: rgba(239, 241, 243, var(--tw-text-opacity));
-  width: 100%;
+@keyframes bounce {
+  0%, 100% {
+    transform: translateY(-25%);
+    -webkit-animation-timing-function: cubic-bezier(0.8,0,1,1);
+            animation-timing-function: cubic-bezier(0.8,0,1,1);
+  }
+
+  50% {
+    transform: none;
+    -webkit-animation-timing-function: cubic-bezier(0,0,0.2,1);
+            animation-timing-function: cubic-bezier(0,0,0.2,1);
+  }
 }
 
-@media (min-width: 768px) {
-  .footer-mobile {
-    margin-top: 0px;
-    position: absolute;
-  }
+.fixed{
+  position: fixed;
 }
 
 @media (min-width: 640px) {
@@ -835,10 +875,6 @@ video {
     --tw-space-x-reverse: 0;
     margin-right: calc(3.5rem * var(--tw-space-x-reverse));
     margin-left: calc(3.5rem * calc(1 - var(--tw-space-x-reverse)));
-  }
-
-  .md\:block {
-    display: block;
   }
 
   .md\:flex {
@@ -858,12 +894,12 @@ video {
     line-height: 1;
   }
 
-  .md\:pl-0 {
-    padding-left: 0px;
+  .md\:mt-0 {
+    margin-top: 0px;
   }
 
-  .md\:visible {
-    visibility: visible;
+  .md\:pl-0 {
+    padding-left: 0px;
   }
 
   .md\:w-20 {

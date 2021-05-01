@@ -59,10 +59,7 @@
     updateValues();
   };
   const beautifyNumber = (number) => {
-    return number
-      .toString()
-      .replace(".", ",")
-      .replace(/\B(?=(\d{3})+(?!\d))/g, ".");
+    return Intl.NumberFormat().format(number);
   };
   const parseBeautifulNumber = (number) => {
     return parseFloat(number.toString().replace(".", "").replace(",", "."));
@@ -275,7 +272,7 @@
         {:else}
           <svg
             xmlns="http://www.w3.org/2000/svg"
-            class="w-6 h-6 -m-t-8"
+            class="w-6 h-6"
             fill="none"
             viewBox="0 0 24 24"
             stroke="currentColor"
@@ -318,10 +315,10 @@
   </div>
 </div>
 <footer
-  class="absolute bottom-0 flex flex-row justify-center w-full p-1 mt-5 text-white border-t md:relative md:mt-0 bg-primary"
+  class="fixed bottom-0 flex justify-center w-full p-1 mt-5 text-white border-t md:mt-0 bg-primary"
 >
-  <div>© 2021 KURODev.net</div>
-  <div class="hidden md:flex">- Todos los derechos reservados.</div>
+  <p>© 2021 KURODev.net</p>
+  <p class="hidden md:flex"> - Todos los derechos reservados</p>
 </footer>
 
 <style>
