@@ -1,17 +1,17 @@
-// postcss.config.js
+const production = !process.env.ROLLUP_WATCH;
 const purgecss = require("@fullhuman/postcss-purgecss");
-const cssnano = require("cssnano");
 
 module.exports = {
   plugins: [
+    require("postcss-import")(),
+    require("precss")(),
     require("tailwindcss"),
-    require("autoprefixer"),
-    cssnano({
-      preset: "default",
-    }),
-    purgecss({
-      content: ["./public/*.html"],
-      defaultExtractor: (content) => content.match(/[\w-/:]+(?<!:)/g) || [],
-    }),
+    production && require("autoprefixer"),
+    production &&
+      purgecss({
+        content: ["./**/*.html", "./**/*.svelte"],
+        defaultExtractor: (content) => content.match(/[A-Za-z0-9-_:/]+/g) || [],
+      }),
+    production && require("cssnano"),
   ],
 };
