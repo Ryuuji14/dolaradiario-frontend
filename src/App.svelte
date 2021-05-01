@@ -134,6 +134,7 @@
           BS. {price}
         </p>
       {:else}
+      {#if !isViewingReport}
         $<input
           class="w-full px-3 py-2 mb-3 leading-tight text-gray-700 border border-green-500 rounded shadow appearance-none bg-secondary focus:outline-none focus:shadow-outline"
           id="usd"
@@ -147,6 +148,7 @@
           id="bs"
           on:input={calculateBS}
         />
+        {/if}
       {/if}
     </div>
   </div>
