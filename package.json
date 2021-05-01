@@ -6,7 +6,7 @@
     "watch:tailwind": "postcss public/tailwind.css -o public/index.css -w",
     "build:tailwind": "cross-env NODE_ENV=production postcss public/tailwind.css -o public/index.css",
     "build": "npm run build:tailwind && rollup -c",
-    "start": "sirv public",
+    "start": "sirv public --host 0.0.0.0",
     "serve": "serve public -p 80",
     "dev": "concurrently \"rollup -c -w\" \"npm run watch:tailwind\"",
     "validate": "svelte-check"
@@ -38,7 +38,7 @@
     "concurrently": "^6.0.2",
     "postcss-import": "^14.0.1",
     "sirv-cli": "^1.0.0",
-    "svelte-carousel": "^1.0.5",
+    "svelte-carousel": "^1.0.3",
     "svelte-routing": "^1.6.0"
   }
 }
