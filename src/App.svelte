@@ -82,28 +82,30 @@
   };
 
   const calculateUSD = () => {
-    usdCalc = parseFloat(document.getElementById('usd').value);
-    bsCalc = Math.round(usdCalc * numberPrice*100)/100;
+    usdCalc = parseFloat(document.getElementById("usd").value);
+    bsCalc = Math.round(usdCalc * numberPrice * 100) / 100;
   };
 
   const calculateBS = (e) => {
-    bsCalc = parseFloat(document.getElementById('bs').value);
-    usdCalc = Math.round(bsCalc / numberPrice*100)/100;
+    bsCalc = parseFloat(document.getElementById("bs").value);
+    usdCalc = Math.round((bsCalc / numberPrice) * 100) / 100;
   };
 </script>
 
 <img class="w-64 h-32 mx-auto" src="./assets/logo.png" alt="dolar logo" />
 
-<div class="flex flex-col items-center my-20">
+<div class="flex flex-col items-center {!isCalculating ? 'my-20' : 'my-15'}">
   <div class="text-5xl text-center text-white md:text-7xl">
     <div class="md:flex md:space-x-2">
       {#if !isCalculating}
         <p on:click={toggleCalculator}>$1</p>
         <p>=</p>
-        <p class="text-primary" id="price" on:click={toggleCalculator}>BS. {price}</p>
+        <p class="text-primary" id="price" on:click={toggleCalculator}>
+          BS. {price}
+        </p>
       {:else}
         $<input
-          class="shadow appearance-none border border-green-500 rounded w-full py-2 px-3 text-gray-700 mb-3 leading-tight focus:outline-none focus:shadow-outline bg-black"
+          class="w-full px-3 py-2 mb-3 leading-tight text-gray-700 border border-green-500 rounded shadow appearance-none bg-secondary focus:outline-none focus:shadow-outline"
           id="usd"
           on:input={calculateUSD}
           type="number"
@@ -111,7 +113,7 @@
         />
         <p>=</p>
         Bs.<input
-          class="shadow appearance-none border border-green-500 rounded w-full py-2 px-3 text-gray-700 mb-3 leading-tight focus:outline-none focus:shadow-outline bg-black"
+          class="w-full px-3 py-2 mb-3 leading-tight text-gray-700 border border-green-500 rounded shadow appearance-none bg-secondary focus:outline-none focus:shadow-outline"
           value={bsCalc}
           id="bs"
           type="number"
@@ -271,7 +273,7 @@
 <footer
   class="absolute bottom-0 w-full p-1 text-center text-white border-t bg-primary border-grey"
 >
-  © 2021 KURODev.net - Todos los derechos reservados..
+  © 2021 KURODev.net - Todos los derechos reservados.
 </footer>
 
 <style>

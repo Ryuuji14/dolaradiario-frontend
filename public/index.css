@@ -526,11 +526,6 @@ video {
   appearance: none;
 }
 
-.bg-black {
-  --tw-bg-opacity: 1;
-  background-color: rgba(0, 0, 0, var(--tw-bg-opacity));
-}
-
 .bg-gray-200 {
   --tw-bg-opacity: 1;
   background-color: rgba(229, 231, 235, var(--tw-bg-opacity));
@@ -544,6 +539,11 @@ video {
 .bg-primary {
   --tw-bg-opacity: 1;
   background-color: rgba(20, 204, 96, var(--tw-bg-opacity));
+}
+
+.bg-secondary {
+  --tw-bg-opacity: 1;
+  background-color: rgba(29, 29, 27, var(--tw-bg-opacity));
 }
 
 .border-green-500 {
