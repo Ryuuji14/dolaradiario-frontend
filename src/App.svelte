@@ -62,7 +62,7 @@
     return Intl.NumberFormat().format(number);
   };
   const parseBeautifulNumber = (number) => {
-    return parseFloat(number.toString().replace(".", "").replace(",", "."));
+    return parseFloat(number.toString().replaceAll(".", "").replace(",", "."));
   };
   const updateValues = () => {
     const providerObject = providers.find((p) => p.id === selectedProvider);
