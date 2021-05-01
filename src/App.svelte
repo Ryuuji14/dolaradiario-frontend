@@ -114,6 +114,7 @@
   };
   const toggleViewingReport = () => {
     isViewingReport = !isViewingReport;
+    isCalculating = false;
   };
 </script>
 
@@ -126,7 +127,7 @@
 <div class="flex flex-col items-center {!isCalculating ? 'my-20' : 'my-15'}">
   <div class="text-5xl text-center text-white md:text-7xl">
     <div class="inline md:flex md:space-x-2">
-      {#if !isCalculating}
+      {#if !isCalculating && !isViewingReport}
         <p on:click={toggleCalculator}>$1</p>
         <p>=</p>
         <p class="text-primary" id="price" on:click={toggleCalculator}>
