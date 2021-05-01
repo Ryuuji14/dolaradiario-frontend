@@ -1,9 +1,9 @@
 <script>
-  //import Carousel from "svelte-carousel";
-  //import "svelte-carousel/dist/index.css";
+  import Carousel from "svelte-carousel";
+  import "svelte-carousel/dist/index.css";
   //import Provider from "./components/Provider.svelte";
   import { onMount } from "svelte";
-  import Carousel from "@beyonk/svelte-carousel";
+  //import Carousel from "@beyonk/svelte-carousel";
 
   let providers = [];
   onMount(async () => {
@@ -32,7 +32,7 @@
   </div>
 
   <div class="flex flex-col items-center my-12">
-    <Carousel perPage={3}>
+    <Carousel let:showPrevPage let:showNextPage>
       <div class="flex">
         <div class="flex h-8 text-xl">
           <div class="hidden md:visible">
