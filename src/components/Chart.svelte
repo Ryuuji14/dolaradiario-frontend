@@ -73,7 +73,7 @@
             data: fechas.map((f) => {
             return i.prices.find((p) => {
               return p.date === f;
-            }).price
+            })?.price
           }),
             label: i.provider,
             borderColor: randomColor(),
