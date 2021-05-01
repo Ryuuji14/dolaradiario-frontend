@@ -1,0 +1,11 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+.footer-mobile {
+    @apply relative md:absolute mt-5 md:mt-0 bottom-0 w-full p-1 text-center text-white border-t bg-primary;
+}
+
+.hidden-text-footer {
+    @apply hidden md:visible
+}

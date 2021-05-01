@@ -108,15 +108,6 @@
   };
 
   const calculateUSD = () => {
-<<<<<<< HEAD
-    usdCalc = parseFloat(document.getElementById("usd").value);
-    bsCalc = Math.round(usdCalc * numberPrice * 100) / 100;
-  };
-
-  const calculateBS = (e) => {
-    bsCalc = parseFloat(document.getElementById("bs").value);
-    usdCalc = Math.round((bsCalc / numberPrice) * 100) / 100;
-=======
     usdCalc = parseBeautifulNumber(document.getElementById("usd").value);
     bsCalc = Math.round(usdCalc * numberPrice * 100) / 100;
     bsVisible = beautifyNumber(bsCalc);
@@ -130,7 +121,6 @@
     usdVisible = beautifyNumber(usdCalc);
     bsVisible = beautifyNumber(bsCalc);
     checkNaN();
->>>>>>> 2e6a6aee3426bc155d5ac9007edaa2d0532d7a7a
   };
 
   const toggleViewingReport = () => {
@@ -143,7 +133,7 @@
 
 <div class="flex flex-col items-center {!isCalculating ? 'my-20' : 'my-15'}">
   <div class="text-5xl text-center text-white md:text-7xl">
-    <div class="md:flex md:space-x-2">
+    <div class="inline md:flex md:space-x-2">
       {#if !isCalculating}
         <p on:click={toggleCalculator}>$1</p>
         <p>=</p>
@@ -159,13 +149,8 @@
         />
         <p>=</p>
         Bs.<input
-<<<<<<< HEAD
-          class="w-full px-3 py-2 mb-3 leading-tight text-gray-700 border border-green-500 rounded shadow appearance-none bg-secondary focus:outline-none focus:shadow-outline"
-          value={bsCalc}
-=======
           class="shadow appearance-none border border-green-500 rounded w-full py-2 px-3 text-gray-700 mb-3 leading-tight focus:outline-none focus:shadow-outline bg-black"
           value={bsVisible}
->>>>>>> 2e6a6aee3426bc155d5ac9007edaa2d0532d7a7a
           id="bs"
           on:input={calculateBS}
         />
@@ -312,17 +297,15 @@
               stroke-width="2"
               d="M9 5H7a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0 002 2h2a2 2 0 002-2M9 5a2 2 0 012-2h2a2 2 0 012 2"
             />
-          </svg></button
-        >
+          </svg></button>
       </div>
-
     </div>
   </div>
 </div>
 <footer
-  class="absolute bottom-0 w-full p-1 text-center text-white border-t bg-primary border-grey"
+  class="footer-mobile"
 >
-  © 2021 KURODev.net - Todos los derechos reservados.
+  © 2021 KURODev.net <p class="hidden-text-footer">- Todos los derechos reservados.</p>
 </footer>
 
 <style>
