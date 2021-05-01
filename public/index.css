@@ -31,6 +31,11 @@ Use a more readable tab size (opinionated).
 2. Prevent adjustments of font size after orientation changes in iOS.
 */
 
+html {
+  line-height: 1.15; /* 1 */
+  -webkit-text-size-adjust: 100%; /* 2 */
+}
+
 /*
 Sections
 ========
@@ -40,9 +45,26 @@ Sections
 Remove the margin in all browsers.
 */
 
+body {
+  margin: 0;
+}
+
 /**
 Improve consistency of default fonts in all browsers. (https://github.com/sindresorhus/modern-normalize/issues/3)
 */
+
+body {
+  font-family:
+		system-ui,
+		-apple-system, /* Firefox supports this but not yet `system-ui` */
+		'Segoe UI',
+		Roboto,
+		Helvetica,
+		Arial,
+		sans-serif,
+		'Apple Color Emoji',
+		'Segoe UI Emoji';
+}
 
 /*
 Grouping content
@@ -100,14 +122,29 @@ Forms
 2. Remove the margin in Firefox and Safari.
 */
 
+button {
+  font-family: inherit; /* 1 */
+  font-size: 100%; /* 1 */
+  line-height: 1.15; /* 1 */
+  margin: 0; /* 2 */
+}
+
 /**
 Remove the inheritance of text transform in Edge and Firefox.
 1. Remove the inheritance of text transform in Firefox.
 */
 
+button { /* 1 */
+  text-transform: none;
+}
+
 /**
 Correct the inability to style clickable types in iOS and Safari.
 */
+
+button {
+  -webkit-appearance: button;
+}
 
 /**
 Remove the inner border and padding in Firefox.
@@ -167,10 +204,25 @@ Add the correct display in Chrome and Safari.
  * Removes the default spacing and border for appropriate elements.
  */
 
+
+p {
+  margin: 0;
+}
+
+button {
+  background-color: transparent;
+  background-image: none;
+}
+
 /**
  * Work around a Firefox/IE bug where the transparent `button` background
  * results in a loss of the default `button` focus styles.
  */
+
+button:focus {
+  outline: 1px dotted;
+  outline: 5px auto -webkit-focus-ring-color;
+}
 
 /**
  * Tailwind custom reset styles
@@ -183,10 +235,20 @@ Add the correct display in Chrome and Safari.
  *    to override it to ensure consistency even when using the default theme.
  */
 
+html {
+  font-family: ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, "Noto Sans", sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji"; /* 1 */
+  line-height: 1.5; /* 2 */
+}
+
 /**
  * Inherit font-family and line-height from `html` so users can set them as
  * a class directly on the `html` element.
  */
+
+body {
+  font-family: inherit;
+  line-height: inherit;
+}
 
 /**
  * 1. Prevent padding and border from affecting element width.
@@ -237,10 +299,23 @@ Add the correct display in Chrome and Safari.
  * https://github.com/tailwindcss/tailwindcss/issues/362
  */
 
+img {
+  border-style: solid;
+}
+
+button {
+  cursor: pointer;
+}
+
 /**
  * Reset links to optimize for opt-in styling instead of
  * opt-out.
  */
+
+a {
+  color: inherit;
+  text-decoration: inherit;
+}
 
 /**
  * Reset form element properties that are easy to forget to
@@ -249,6 +324,12 @@ Add the correct display in Chrome and Safari.
  * supplement a partial reset that is already applied by
  * normalize.css.
  */
+
+button {
+  padding: 0;
+  line-height: inherit;
+  color: inherit;
+}
 
 /**
  * Use the configured 'mono' font family for elements that
@@ -265,12 +346,167 @@ Add the correct display in Chrome and Safari.
  * https://github.com/mozdevs/cssremedy/issues/14
  */
 
+img,
+svg {
+  display: block;
+  vertical-align: middle;
+}
+
 /**
  * Constrain images and videos to the parent width and preserve
  * their intrinsic aspect ratio.
  *
  * https://github.com/mozdevs/cssremedy/issues/14
  */
+
+img {
+  max-width: 100%;
+  height: auto;
+}
+
+.space-x-4 > :not([hidden]) ~ :not([hidden]) {
+  --tw-space-x-reverse: 0;
+  margin-right: calc(1rem * var(--tw-space-x-reverse));
+  margin-left: calc(1rem * calc(1 - var(--tw-space-x-reverse)));
+}
+
+.space-x-5 > :not([hidden]) ~ :not([hidden]) {
+  --tw-space-x-reverse: 0;
+  margin-right: calc(1.25rem * var(--tw-space-x-reverse));
+  margin-left: calc(1.25rem * calc(1 - var(--tw-space-x-reverse)));
+}
+
+.space-x-7 > :not([hidden]) ~ :not([hidden]) {
+  --tw-space-x-reverse: 0;
+  margin-right: calc(1.75rem * var(--tw-space-x-reverse));
+  margin-left: calc(1.75rem * calc(1 - var(--tw-space-x-reverse)));
+}
+
+.bg-gray-200 {
+  --tw-bg-opacity: 1;
+  background-color: rgba(229, 231, 235, var(--tw-bg-opacity));
+}
+
+.bg-gray-500 {
+  --tw-bg-opacity: 1;
+  background-color: rgba(107, 114, 128, var(--tw-bg-opacity));
+}
+
+.bg-primary {
+  --tw-bg-opacity: 1;
+  background-color: rgba(20, 204, 96, var(--tw-bg-opacity));
+}
+
+.rounded-full {
+  border-radius: 9999px;
+}
+
+.border-t {
+  border-top-width: 1px;
+}
+
+.cursor-pointer {
+  cursor: pointer;
+}
+
+.flex {
+  display: flex;
+}
+
+.hidden {
+  display: none;
+}
+
+.flex-col {
+  flex-direction: column;
+}
+
+.items-center {
+  align-items: center;
+}
+
+.justify-center {
+  justify-content: center;
+}
+
+.h-4 {
+  height: 1rem;
+}
+
+.h-8 {
+  height: 2rem;
+}
+
+.h-12 {
+  height: 3rem;
+}
+
+.h-16 {
+  height: 4rem;
+}
+
+.h-32 {
+  height: 8rem;
+}
+
+.text-lg {
+  font-size: 1.125rem;
+  line-height: 1.75rem;
+}
+
+.text-xl {
+  font-size: 1.25rem;
+  line-height: 1.75rem;
+}
+
+.text-2xl {
+  font-size: 1.5rem;
+  line-height: 2rem;
+}
+
+.text-5xl {
+  font-size: 3rem;
+  line-height: 1;
+}
+
+.my-12 {
+  margin-top: 3rem;
+  margin-bottom: 3rem;
+}
+
+.my-20 {
+  margin-top: 5rem;
+  margin-bottom: 5rem;
+}
+
+.mx-auto {
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.mr-14 {
+  margin-right: 3.5rem;
+}
+
+.ml-14 {
+  margin-left: 3.5rem;
+}
+
+.p-1 {
+  padding: 0.25rem;
+}
+
+.pl-40 {
+  padding-left: 10rem;
+}
+
+.absolute {
+  position: absolute;
+}
+
+.bottom-0 {
+  bottom: 0px;
+}
 
 * {
   --tw-shadow: 0 0 #0000;
@@ -283,6 +519,44 @@ Add the correct display in Chrome and Safari.
   --tw-ring-color: rgba(59, 130, 246, 0.5);
   --tw-ring-offset-shadow: 0 0 #0000;
   --tw-ring-shadow: 0 0 #0000;
+}
+
+.text-center {
+  text-align: center;
+}
+
+.text-primary {
+  --tw-text-opacity: 1;
+  color: rgba(20, 204, 96, var(--tw-text-opacity));
+}
+
+.text-white {
+  --tw-text-opacity: 1;
+  color: rgba(239, 241, 243, var(--tw-text-opacity));
+}
+
+.w-4 {
+  width: 1rem;
+}
+
+.w-8 {
+  width: 2rem;
+}
+
+.w-12 {
+  width: 3rem;
+}
+
+.w-16 {
+  width: 4rem;
+}
+
+.w-64 {
+  width: 16rem;
+}
+
+.w-full {
+  width: 100%;
 }
 
 @keyframes spin {
@@ -320,6 +594,46 @@ Add the correct display in Chrome and Safari.
 }
 
 @media (min-width: 768px) {
+  .md\:space-x-2 > :not([hidden]) ~ :not([hidden]) {
+    --tw-space-x-reverse: 0;
+    margin-right: calc(0.5rem * var(--tw-space-x-reverse));
+    margin-left: calc(0.5rem * calc(1 - var(--tw-space-x-reverse)));
+  }
+
+  .md\:space-x-14 > :not([hidden]) ~ :not([hidden]) {
+    --tw-space-x-reverse: 0;
+    margin-right: calc(3.5rem * var(--tw-space-x-reverse));
+    margin-left: calc(3.5rem * calc(1 - var(--tw-space-x-reverse)));
+  }
+
+  .md\:flex {
+    display: flex;
+  }
+
+  .md\:hidden {
+    display: none;
+  }
+
+  .md\:h-20 {
+    height: 5rem;
+  }
+
+  .md\:text-7xl {
+    font-size: 4.5rem;
+    line-height: 1;
+  }
+
+  .md\:pl-0 {
+    padding-left: 0px;
+  }
+
+  .md\:visible {
+    visibility: visible;
+  }
+
+  .md\:w-20 {
+    width: 5rem;
+  }
 }
 
 @media (min-width: 1024px) {
