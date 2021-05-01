@@ -1,0 +1,103 @@
+<script>
+  import { onMount } from "svelte";
+  import {
+    Chart,
+    ArcElement,
+    LineElement,
+    BarElement,
+    PointElement,
+    BarController,
+    BubbleController,
+    DoughnutController,
+    LineController,
+    PieController,
+    PolarAreaController,
+    RadarController,
+    ScatterController,
+    CategoryScale,
+    LinearScale,
+    LogarithmicScale,
+    RadialLinearScale,
+    TimeScale,
+    TimeSeriesScale,
+    Decimation,
+    Filler,
+    Legend,
+    Title,
+    Tooltip,
+  } from "chart.js";
+  Chart.register(
+    ArcElement,
+    LineElement,
+    BarElement,
+    PointElement,
+    BarController,
+    BubbleController,
+    DoughnutController,
+    LineController,
+    PieController,
+    PolarAreaController,
+    RadarController,
+    ScatterController,
+    CategoryScale,
+    LinearScale,
+    LogarithmicScale,
+    RadialLinearScale,
+    TimeScale,
+    TimeSeriesScale,
+    Decimation,
+    Filler,
+    Legend,
+    Title,
+    Tooltip
+  );
+  onMount(async () => {
+    await fetch(`https://dolaradiario.herokuapp.com/history`)
+      .then((r) => r.json())
+      .then((data) => {
+        const info = data.data;
+        const providers = info.map((i) => i.provider);
+        const fechas = [
+          ...new Set(info[0].prices.map((price) => price.date)),
+        ].reverse();
+        console.log(fechas);
+        console.log(info);
+        const randomColor = () => {
+          var letters = "0123456789ABCDEF".split("");
+          var color = "#";
+          for (var i = 0; i < 6; i++) {
+            color += letters[Math.floor(Math.random() * 16)];
+          }
+          return color;
+        };
+        const dataset = info.map((i) => {
+          return {
+            data: fechas.map((f) => i.prices.find((p) => p.date === f)?.price),
+            label: i.provider,
+            borderColor: randomColor(),
+          };
+        });
+        console.log(dataset);
+        new Chart(document.getElementById("line-chart"), {
+          type: "line",
+          data: {
+            labels: fechas,
+            datasets: dataset,
+          },
+          options: {
+            title: {
+              display: true,
+              text: "World population per region (in millions)",
+            },
+          },
+        });
+      });
+  });
+</script>
+
+<div class="flex flex-col items-center my-20">
+  <canvas id="line-chart" width="200" height="200" />
+</div>
+
+<style>
+</style>

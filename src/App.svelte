@@ -1,8 +1,9 @@
 <script>
+  import Chart from "./components/Chart.svelte";
+  import Footer from "./components/Footer.svelte";
   import { onMount } from "svelte";
   import { SvelteToast } from "@zerodevx/svelte-toast";
   import { toast } from "@zerodevx/svelte-toast";
-
   let selectedProvider = 2;
   let prices;
   let providers;
@@ -18,7 +19,6 @@
   let bsVisible = "0";
   let isCalculating = false;
   let isViewingReport = false;
-
   onMount(async () => {
     await fetch(`https://dolaradiario.herokuapp.com/main`)
       .then((r) => r.json())
@@ -28,7 +28,6 @@
         updateValues();
       });
   });
-
   const copyToClipboard = () => {
     const x = document.createElement("textarea");
     document.body.appendChild(x);
@@ -51,28 +50,23 @@
     });
     document.body.removeChild(x);
   };
-
   const rightClick = () => {
     selectedProvider = selectedProvider < 5 ? selectedProvider + 1 : 1;
     updateValues();
   };
-
   const leftClick = () => {
     selectedProvider = selectedProvider > 1 ? selectedProvider - 1 : 5;
     updateValues();
   };
-
   const beautifyNumber = (number) => {
     return number
       .toString()
       .replace(".", ",")
       .replace(/\B(?=(\d{3})+(?!\d))/g, ".");
   };
-
   const parseBeautifulNumber = (number) => {
     return parseFloat(number.toString().replace(".", "").replace(",", "."));
   };
-
   const updateValues = () => {
     const providerObject = providers.find((p) => p.id === selectedProvider);
     provider = providerObject.description;
@@ -90,14 +84,12 @@
     bsCalc = Math.round(usdCalc * numberPrice * 100) / 100;
     bsVisible = beautifyNumber(bsCalc);
   };
-
   const toggleCalculator = () => {
     isCalculating = !isCalculating;
     isViewingReport = false;
     usdCalc = 1;
     bsCalc = usdCalc * numberPrice;
   };
-
   const checkNaN = () => {
     if (isNaN(bsCalc) || isNaN(usdCalc)) {
       usdCalc = 1;
@@ -106,43 +98,38 @@
       usdVisible = beautifyNumber(usdCalc);
     }
   };
-
   const calculateUSD = () => {
-<<<<<<< HEAD
-    usdCalc = parseFloat(document.getElementById("usd").value);
-    bsCalc = Math.round(usdCalc * numberPrice * 100) / 100;
-  };
-
-  const calculateBS = (e) => {
-    bsCalc = parseFloat(document.getElementById("bs").value);
-    usdCalc = Math.round((bsCalc / numberPrice) * 100) / 100;
-=======
     usdCalc = parseBeautifulNumber(document.getElementById("usd").value);
     bsCalc = Math.round(usdCalc * numberPrice * 100) / 100;
     bsVisible = beautifyNumber(bsCalc);
     usdVisible = beautifyNumber(usdCalc);
     checkNaN();
   };
-
   const calculateBS = (e) => {
     bsCalc = parseBeautifulNumber(document.getElementById("bs").value);
     usdCalc = Math.round((bsCalc / numberPrice) * 100) / 100;
     usdVisible = beautifyNumber(usdCalc);
     bsVisible = beautifyNumber(bsCalc);
     checkNaN();
->>>>>>> 2e6a6aee3426bc155d5ac9007edaa2d0532d7a7a
   };
-
   const toggleViewingReport = () => {
     isViewingReport = !isViewingReport;
-  }
+  };
 </script>
 
 <SvelteToast />
 <img class="w-64 h-32 mx-auto" src="./assets/logo.png" alt="dolar logo" />
 
-<div class="flex flex-col items-center {!isCalculating ? 'my-20' : 'my-15'}">
-  <div class="text-5xl text-center text-white md:text-7xl">
+<div
+  class="flex flex-col items-center {!isCalculating
+    ? 'my-20'
+    : 'my-15'} {!isViewingReport ? 'visible' : 'hidden'}"
+>
+  <div
+    class="text-5xl text-center text-white md:text-7xl  {!isViewingReport
+      ? 'visible'
+      : 'hidden'}"
+  >
     <div class="md:flex md:space-x-2">
       {#if !isCalculating}
         <p on:click={toggleCalculator}>$1</p>
@@ -159,25 +146,20 @@
         />
         <p>=</p>
         Bs.<input
-<<<<<<< HEAD
           class="w-full px-3 py-2 mb-3 leading-tight text-gray-700 border border-green-500 rounded shadow appearance-none bg-secondary focus:outline-none focus:shadow-outline"
           value={bsCalc}
-=======
-          class="shadow appearance-none border border-green-500 rounded w-full py-2 px-3 text-gray-700 mb-3 leading-tight focus:outline-none focus:shadow-outline bg-black"
-          value={bsVisible}
->>>>>>> 2e6a6aee3426bc155d5ac9007edaa2d0532d7a7a
           id="bs"
           on:input={calculateBS}
         />
       {/if}
     </div>
   </div>
-  <div class="flex">
+  <div class="flex  {!isViewingReport ? 'visible' : 'hidden'}">
     <p class="pl-40 text-lg text-white md:pl-0">Actualizado {updated}</p>
   </div>
 
-  <div class="flex flex-col items-center my-12">
-    <div class="flex">
+  <div class="flex flex-col items-center my-12 ">
+    <div class="flex {!isViewingReport ? 'visible' : 'hidden'}">
       <div class="flex h-8 text-xl">
         <div class="hidden md:visible">
           <p class="text-white" style="margin-right: 5px;">SEGÚN</p>
@@ -233,10 +215,12 @@
       </div>
     </div>
   </div>
-  <div class="flex space-x-7 md:space-x-14">
+  <div class="flex space-x-7 md:space-x-14 ">
     <div>
       <button
-        class="flex items-center justify-center w-16 h-16 bg-gray-500 rounded-full md:w-20 md:h-20"
+        class="flex items-center justify-center w-16 h-16 bg-gray-500 rounded-full md:w-20 md:h-20 {!isViewingReport
+          ? 'visible'
+          : 'hidden'}"
         on:click={toggleCalculator}
       >
         {#if !isCalculating}
@@ -274,26 +258,45 @@
     </div>
     <div>
       <button
-        class="flex items-center justify-center w-16 h-16 bg-gray-500 rounded-full md:w-20 md:h-20"
+        class="flex items-center justify-center w-16 h-16 bg-gray-500 rounded-full md:w-20 md:h-20 "
         on:click={toggleViewingReport}
       >
-        <svg
-          xmlns="http://www.w3.org/2000/svg"
-          class="w-12 h-12"
-          fill="none"
-          viewBox="0 0 24 24"
-          stroke="currentColor"
-        >
-          <path
-            stroke-linecap="round"
-            stroke-linejoin="round"
-            stroke-width="2"
-            d="M7 12l3-3 3 3 4-4M8 21l4-4 4 4M3 4h18M4 4h16v12a1 1 0 01-1 1H5a1 1 0 01-1-1V4z"
-          />
-        </svg></button
-      >
+        {#if !isViewingReport}
+          <svg
+            xmlns="http://www.w3.org/2000/svg"
+            class="w-12 h-12"
+            fill="none"
+            viewBox="0 0 24 24"
+            stroke="currentColor"
+          >
+            <path
+              stroke-linecap="round"
+              stroke-linejoin="round"
+              stroke-width="2"
+              d="M7 12l3-3 3 3 4-4M8 21l4-4 4 4M3 4h18M4 4h16v12a1 1 0 01-1 1H5a1 1 0 01-1-1V4z"
+            />
+          </svg>
+        {:else}
+          <svg
+            xmlns="http://www.w3.org/2000/svg"
+            class="w-6 h-6"
+            fill="none"
+            viewBox="0 0 24 24"
+            stroke="currentColor"
+          >
+            <path
+              stroke-linecap="round"
+              stroke-linejoin="round"
+              stroke-width="2"
+              d="M11 15l-3-3m0 0l3-3m-3 3h8M3 12a9 9 0 1118 0 9 9 0 01-18 0z"
+            />
+          </svg>
+        {/if}
+      </button>
     </div>
-    <div class="flex space-x-5 md:hidden">
+    <div
+      class="flex space-x-5 md:hidden {!isViewingReport ? 'visible' : 'hidden'}"
+    >
       <div>
         <button
           class="flex items-center justify-center w-16 h-16 bg-gray-500 rounded-full md:w-20 md:h-20"
@@ -315,15 +318,10 @@
           </svg></button
         >
       </div>
-
     </div>
   </div>
 </div>
-<footer
-  class="absolute bottom-0 w-full p-1 text-center text-white border-t bg-primary border-grey"
->
-  © 2021 KURODev.net - Todos los derechos reservados.
-</footer>
+<Footer />
 
 <style>
 </style>
