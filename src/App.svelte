@@ -133,8 +133,7 @@
         <p class="text-primary" id="price" on:click={toggleCalculator}>
           BS. {price}
         </p>
-      {:else}
-      {#if !isViewingReport}
+      {:else if !isViewingReport}
         $<input
           class="w-full px-3 py-2 mb-3 leading-tight text-gray-700 border border-green-500 rounded shadow appearance-none bg-secondary focus:outline-none focus:shadow-outline"
           id="usd"
@@ -148,7 +147,6 @@
           id="bs"
           on:input={calculateBS}
         />
-        {/if}
       {/if}
     </div>
   </div>
@@ -159,7 +157,7 @@
   <div class="flex flex-col items-center my-12 ">
     <div class="flex {!isViewingReport ? 'visible' : 'hidden'}">
       <div class="flex h-8 text-xl">
-        <div class="hidden md:visible">
+        <div class="hidden md:flex">
           <p class="text-white" style="margin-right: 5px;">SEGÚN</p>
         </div>
       </div>
@@ -319,11 +317,11 @@
     </div>
   </div>
 </div>
-<footer class="footer-mobile">
-  © 2021 KURODev.net
-  <div class="hidden-text-footer">
-    <p>- Todos los derechos reservados.</p>
-  </div>
+<footer
+  class="absolute bottom-0 flex flex-row justify-center w-full p-1 mt-5 text-white border-t md:relative md:mt-0 bg-primary"
+>
+  <div>© 2021 KURODev.net</div>
+  <div class="hidden md:flex">- Todos los derechos reservados.</div>
 </footer>
 
 <style>

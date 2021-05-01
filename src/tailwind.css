@@ -2,10 +2,3 @@
 @tailwind components;
 @tailwind utilities;
 
-.footer-mobile {
-    @apply relative bottom-0 flex w-full p-1 mt-5 text-center text-white border-t md:mt-0 bg-primary;
-}
-
-.hidden-text-footer {
-    @apply hidden md:block md:visible
-}
