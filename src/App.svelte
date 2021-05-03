@@ -87,27 +87,40 @@
     usdCalc = 1;
     bsCalc = usdCalc * numberPrice;
   };
-  const checkNaN = () => {
-    if (isNaN(bsCalc) || isNaN(usdCalc)) {
-      usdCalc = 1;
-      bsCalc = numberPrice;
-      bsVisible = beautifyNumber(bsCalc);
-      usdVisible = beautifyNumber(usdCalc);
+
+  const validateLetter = (e) => {
+    if (isNaN(parseFloat(e.key)) && e.key !== "." && e.key !== ",")
+      e.preventDefault();
+    if (e.key === "." || e.key === ",") {
+      checkDecimalNumber(e);
     }
   };
+
+  const checkDecimalNumber = (e) => {
+    if (
+      parseBeautifulNumber(document.getElementById("usd").value)
+        .toString()
+        .indexOf(".") === -1
+    ) {
+      e.preventDefault();
+      document.getElementById("usd").value += ",";
+    } else {
+      e.preventDefault();
+    }
+  };
+
   const calculateUSD = () => {
-    usdCalc = parseBeautifulNumber(document.getElementById("usd").value);
+    const usdC = parseBeautifulNumber(document.getElementById("usd").value);
+    usdCalc = isNaN(usdC) ? 0 : usdC;
     bsCalc = Math.round(usdCalc * numberPrice * 100) / 100;
     bsVisible = beautifyNumber(bsCalc);
     usdVisible = beautifyNumber(usdCalc);
-    checkNaN();
   };
-  const calculateBS = (e) => {
+  const calculateBS = () => {
     bsCalc = parseBeautifulNumber(document.getElementById("bs").value);
     usdCalc = Math.round((bsCalc / numberPrice) * 100) / 100;
     usdVisible = beautifyNumber(usdCalc);
     bsVisible = beautifyNumber(bsCalc);
-    checkNaN();
   };
   const toggleViewingReport = () => {
     isViewingReport = !isViewingReport;
@@ -139,7 +152,6 @@
       });
     } catch (error) {
       console.log(error);
-      alert(error);
     }
   };
 </script>
@@ -164,14 +176,16 @@
           class="w-full px-3 py-2 mb-3 leading-tight text-gray-700 border border-green-500 rounded shadow appearance-none bg-secondary focus:outline-none focus:shadow-outline"
           id="usd"
           on:input={calculateUSD}
+          on:keypress={validateLetter}
           value={usdVisible}
         />
         <p>=</p>
         Bs.<input
           class="w-full px-3 py-2 mb-3 leading-tight text-gray-700 border border-green-500 rounded shadow appearance-none bg-secondary focus:outline-none focus:shadow-outline"
-          value={bsCalc}
+          value={bsVisible}
           id="bs"
           on:input={calculateBS}
+          on:keypress={validateLetter}
         />
       {/if}
     </div>
@@ -326,13 +340,13 @@
         >
           <svg
             xmlns="http://www.w3.org/2000/svg"
-            class="h-12 w-12"
+            class="h-5 w-5"
             viewBox="0 0 20 20"
             fill="currentColor"
           >
-            <path d="M8 2a1 1 0 000 2h2a1 1 0 100-2H8z" />
+            <path d="M8 3a1 1 0 011-1h2a1 1 0 110 2H9a1 1 0 01-1-1z" />
             <path
-              d="M3 5a2 2 0 012-2 3 3 0 003 3h2a3 3 0 003-3 2 2 0 012 2v6h-4.586l1.293-1.293a1 1 0 00-1.414-1.414l-3 3a1 1 0 000 1.414l3 3a1 1 0 001.414-1.414L10.414 13H15v3a2 2 0 01-2 2H5a2 2 0 01-2-2V5zM15 11h2a1 1 0 110 2h-2v-2z"
+              d="M6 3a2 2 0 00-2 2v11a2 2 0 002 2h8a2 2 0 002-2V5a2 2 0 00-2-2 3 3 0 01-3 3H9a3 3 0 01-3-3z"
             />
           </svg></button
         >
@@ -362,7 +376,7 @@
   </div>
 </div>
 <footer
-  class="fixed bottom-0 flex justify-center w-full p-1 mt-5 text-white border-t md:mt-0 bg-primary"
+  class="relative md:fixed bottom-0 flex justify-center w-full p-1 mt-5 text-white border-t md:mt-0 bg-primary"
 >
   <p>© 2021 KURODev.net</p>
   <p class="hidden md:flex">- Todos los derechos reservados</p>
