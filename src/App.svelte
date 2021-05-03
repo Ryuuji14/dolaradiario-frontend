@@ -59,7 +59,7 @@
     updateValues();
   };
   const beautifyNumber = (number) => {
-    return Intl.NumberFormat().format(number);
+    return Intl.NumberFormat('es-VE').format(number);
   };
   const parseBeautifulNumber = (number) => {
     return parseFloat(number.toString().replaceAll(".", "").replace(",", "."));
