@@ -113,6 +113,35 @@
     isViewingReport = !isViewingReport;
     isCalculating = false;
   };
+
+  const mobileShare = async () => {
+    const options = {
+      url: "https://dolaradiario.netlify.app",
+      text: `El dólar hoy ${new Date().toLocaleDateString("es-ve", {
+        timeZone: "America/Caracas",
+        weekday: "long",
+        day: "numeric",
+        month: "long",
+        year: "numeric",
+      })} cuesta Bs. ${price} según ${
+        provider != "Promedio" ? provider : "Dolar A Diario"
+      }`,
+    };
+    try {
+      const sharePromise = await navigator.share(options);
+      sharePromise.then((T) => {
+        toast.push("¡Precio compartido con éxito!", {
+          theme: {
+            "--toastBackground": "#48BB78",
+            "--toastProgressBackground": "#2F855A",
+          },
+        });
+      });
+    } catch (error) {
+      console.log(error);
+      alert(error);
+    }
+  };
 </script>
 
 <SvelteToast />
@@ -272,7 +301,7 @@
         {:else}
           <svg
             xmlns="http://www.w3.org/2000/svg"
-            class="w-6 h-6"
+            class="w-12 h-12"
             fill="none"
             viewBox="0 0 24 24"
             stroke="currentColor"
@@ -297,16 +326,34 @@
         >
           <svg
             xmlns="http://www.w3.org/2000/svg"
-            class="w-12 h-12"
-            fill="none"
-            viewBox="0 0 24 24"
-            stroke="currentColor"
+            class="h-12 w-12"
+            viewBox="0 0 20 20"
+            fill="currentColor"
+          >
+            <path d="M8 2a1 1 0 000 2h2a1 1 0 100-2H8z" />
+            <path
+              d="M3 5a2 2 0 012-2 3 3 0 003 3h2a3 3 0 003-3 2 2 0 012 2v6h-4.586l1.293-1.293a1 1 0 00-1.414-1.414l-3 3a1 1 0 000 1.414l3 3a1 1 0 001.414-1.414L10.414 13H15v3a2 2 0 01-2 2H5a2 2 0 01-2-2V5zM15 11h2a1 1 0 110 2h-2v-2z"
+            />
+          </svg></button
+        >
+      </div>
+    </div>
+    <div
+      class="flex space-x-5 md:hidden {!isViewingReport ? 'visible' : 'hidden'}"
+    >
+      <div>
+        <button
+          class="flex items-center justify-center w-16 h-16 bg-gray-500 rounded-full md:w-20 md:h-20"
+          on:click={mobileShare}
+        >
+          <svg
+            xmlns="http://www.w3.org/2000/svg"
+            class="h-12 w-12"
+            viewBox="0 0 20 20"
+            fill="currentColor"
           >
             <path
-              stroke-linecap="round"
-              stroke-linejoin="round"
-              stroke-width="2"
-              d="M9 5H7a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0 002 2h2a2 2 0 002-2M9 5a2 2 0 012-2h2a2 2 0 012 2"
+              d="M15 8a3 3 0 10-2.977-2.63l-4.94 2.47a3 3 0 100 4.319l4.94 2.47a3 3 0 10.895-1.789l-4.94-2.47a3.027 3.027 0 000-.74l4.94-2.47C13.456 7.68 14.19 8 15 8z"
             />
           </svg></button
         >
@@ -318,7 +365,7 @@
   class="fixed bottom-0 flex justify-center w-full p-1 mt-5 text-white border-t md:mt-0 bg-primary"
 >
   <p>© 2021 KURODev.net</p>
-  <p class="hidden md:flex"> - Todos los derechos reservados</p>
+  <p class="hidden md:flex">- Todos los derechos reservados</p>
 </footer>
 
 <style>
