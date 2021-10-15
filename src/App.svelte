@@ -162,8 +162,8 @@
   <Chart />
 {/if}
 
-<div class="flex flex-col min-h-screen">
-  <body class="flex-grow">
+<div class="flex flex-col">
+  <body>
     <div
       class="flex flex-col items-center {!isCalculating ? 'my-20' : 'my-15'}"
     >
@@ -297,11 +297,11 @@
           </button>
         </div>
         <div>
-          <button
-            class="flex items-center justify-center w-16 h-16 bg-gray-500 rounded-full md:w-20 md:h-20 "
-            on:click={toggleViewingReport}
-          >
-            {#if !isViewingReport}
+          {#if !isViewingReport}
+            <button
+              class="flex items-center justify-center w-16 h-16 bg-gray-500 rounded-full md:w-20 md:h-20"
+              on:click={toggleViewingReport}
+            >
               <svg
                 xmlns="http://www.w3.org/2000/svg"
                 class="w-12 h-12"
@@ -316,7 +316,13 @@
                   d="M7 12l3-3 3 3 4-4M8 21l4-4 4 4M3 4h18M4 4h16v12a1 1 0 01-1 1H5a1 1 0 01-1-1V4z"
                 />
               </svg>
-            {:else}
+            </button>
+          {:else}
+            <button
+              class="flex items-center justify-center w-16 h-16 bg-gray-500 rounded-full md:w-20 md:h-20"
+              style="margin-top:-125px"
+              on:click={toggleViewingReport}
+            >
               <svg
                 xmlns="http://www.w3.org/2000/svg"
                 class="w-12 h-12"
@@ -331,14 +337,10 @@
                   d="M11 15l-3-3m0 0l3-3m-3 3h8M3 12a9 9 0 1118 0 9 9 0 01-18 0z"
                 />
               </svg>
-            {/if}
-          </button>
+            </button>
+          {/if}
         </div>
-        <div
-          class="flex space-x-5 {!isViewingReport
-            ? 'visible'
-            : 'hidden'}"
-        >
+        <div class="flex space-x-5 {!isViewingReport ? 'visible' : 'hidden'}">
           <div>
             <button
               class="flex items-center justify-center w-16 h-16 bg-gray-500 rounded-full md:w-20 md:h-20"

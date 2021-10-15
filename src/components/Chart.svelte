@@ -98,7 +98,7 @@
   });
 </script>
 
-<div class="flex justify-center">
+<div class="flex justify-center" style="margin-top: 10px">
   <div class="flex-col" style="width: 700px !important">
     <canvas id="line-chart" />
   </div>
