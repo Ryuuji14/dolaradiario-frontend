@@ -51,11 +51,11 @@
     document.body.removeChild(x);
   };
   const rightClick = () => {
-    selectedProvider = selectedProvider < 5 ? selectedProvider + 1 : 1;
+    selectedProvider = selectedProvider < 4 ? selectedProvider + 1 : 1;
     updateValues();
   };
   const leftClick = () => {
-    selectedProvider = selectedProvider > 1 ? selectedProvider - 1 : 5;
+    selectedProvider = selectedProvider > 1 ? selectedProvider - 1 : 4;
     updateValues();
   };
   const beautifyNumber = (number) => {
