@@ -5,3 +5,10 @@
 .fixed{
     position: fixed;
 }
+
+.chart-size{
+    width: 640px;
+    height: 480px;
+    justify-content: center;
+    justify-self: center;
+}

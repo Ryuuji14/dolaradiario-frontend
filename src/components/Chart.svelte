@@ -98,7 +98,7 @@
   });
 </script>
 
-<div class="flex flex-col items-center my-20">
+<div class="flex flex-col items-center chart-size">
   <canvas id="line-chart" width="200" height="200" />
 </div>
 
