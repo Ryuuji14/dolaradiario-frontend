@@ -75,7 +75,7 @@
             });
           });
           return {
-            data: prices.map((p) => p ? p.price : undefined),
+            data: prices.map((p) => (p ? p.price : undefined)),
             label: i.provider,
             borderColor: randomColor(),
           };
@@ -98,8 +98,10 @@
   });
 </script>
 
-<div class="flex flex-col items-center chart-size">
-  <canvas id="line-chart" width="200" height="200" />
+<div class="flex justify-center">
+  <div class="flex-col" style="width: 700px !important">
+    <canvas id="line-chart" />
+  </div>
 </div>
 
 <style>

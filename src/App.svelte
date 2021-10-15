@@ -335,7 +335,7 @@
           </button>
         </div>
         <div
-          class="flex space-x-5 md:hidden {!isViewingReport
+          class="flex space-x-5 {!isViewingReport
             ? 'visible'
             : 'hidden'}"
         >
