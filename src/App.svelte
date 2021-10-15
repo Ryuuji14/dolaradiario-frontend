@@ -356,7 +356,7 @@
       </div>
     </div>
     <div
-      class="flex space-x-5 md:hidden {!isViewingReport ? 'visible' : 'hidden'}"
+      class="flex space-x-5 md:hidden {!isViewingReport && navigator.canShare ? 'visible' : 'hidden'}"
     >
       <div>
         <button
