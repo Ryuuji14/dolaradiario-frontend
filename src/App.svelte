@@ -52,10 +52,12 @@
   };
   const rightClick = () => {
     selectedProvider = selectedProvider < 6 ? selectedProvider + 1 : 1;
+    selectedProvider = selectedProvider === 4 ? 5 : selectedProvider
     updateValues();
   };
   const leftClick = () => {
     selectedProvider = selectedProvider > 1 ? selectedProvider - 1 : 6;
+    selectedProvider = selectedProvider === 3 ? 2 : selectedProvider
     updateValues();
   };
   const beautifyNumber = (number) => {
