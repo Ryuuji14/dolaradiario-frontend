@@ -57,7 +57,7 @@
   };
   const leftClick = () => {
     selectedProvider = selectedProvider > 1 ? selectedProvider - 1 : 6;
-    selectedProvider = selectedProvider === 3 ? 2 : selectedProvider
+    selectedProvider = selectedProvider === 5 ? 3 : selectedProvider
     updateValues();
   };
   const beautifyNumber = (number) => {
